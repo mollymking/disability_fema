@@ -1,0 +1,81 @@
+--------------------------------------------------------------------------------
+      name:  fema01_impe_FEMA2020
+       log:  /Users/mollymking/Documents/SocResearch/RA_projects/FEMA_Disability
+> _Climate/code/fema01_impe_FEMA2020.log
+  log type:  text
+ opened on:  30 Aug 2021, 18:23:59
+
+. ***-----------------------------***
+. 
+. //      project:        Disability and Information about Climate Disaster
+. //  task:       Import "fema_national-household-survey-raw-data-and-weights_20
+> 20.xlsx" and save to Derived folder
+. /*  data:    */ di "`dataset'"
+FEMA2020
+
+. 
+. //  github:     fema_disability
+. //  OSF:                
+. 
+. //  author:     Molly King & Brooke Rose
+. 
+. display "$S_DATE  $S_TIME"
+30 Aug 2021  18:23:59
+
+. 
+. ***--------------------------***
+. // # PROGRAM SETUP
+. ***-----------------------------***
+. 
+. version 16 // keeps program consistent for future replications
+
+. set linesize 80
+
+. clear all
+
+. set more off
+
+. 
+. ***-----------------------------***
+. // # IMPORT
+. ***-----------------------------***
+. 
+. import excel ///
+> $source/fema_national-household-survey-raw-data-and-weights_2020.xlsx, ///
+>         sheet("2020 NHS - Raw Data and Weights") ///
+>         firstrow clear
+(1,025 vars, 5,020 obs)
+
+. 
+. rename weights combwtall
+
+. ***--------------------------***
+. // # SAVE DATA
+. ***-----------------------------***
+. 
+. label data "`dataset' data: FEMA National Household Survey 2019"
+
+. notes: fema`category'_`dataset'.dta \ FEMA National Household Survey 2020 \ fe
+> ma`category'_`dataset'.do mmk $S_DATE
+
+. compress
+  (0 bytes saved)
+
+. datasignature set
+  5020:1025(54682):700630947:1387310963       (data signature set)
+
+. 
+. save $deriv/fema`category'_`dataset'.dta, replace
+file ~/Documents/SocResearch/RA_projects/FEMA_Disability_Climate/data/data_derv/
+> fema01_impe_FEMA2020.dta saved
+
+. 
+. ***--------------------------***
+. 
+. log close fema`category'_`dataset'
+      name:  fema01_impe_FEMA2020
+       log:  /Users/mollymking/Documents/SocResearch/RA_projects/FEMA_Disability
+> _Climate/code/fema01_impe_FEMA2020.log
+  log type:  text
+ closed on:  30 Aug 2021, 18:24:19
+--------------------------------------------------------------------------------
